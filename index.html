@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!--如果適用cdn載入vue畫面會有問題, 請自行去官方網站抓語法~!---->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.min.js'></script>
+</head>
+<style>
+    *{
+        font-size:20px;
+    }
+    li{
+        list-style:none;
+    }
+    table{}
+    tr{height:50px;}
+    th,td{width:200px;}
+    th{background:pink;}
+    .pic{
+        width:150px;
+        height:150px;
+    }
+    .payment{
+        width:100%;
+        background:yellow;
+        height:50px;
+    }
+</style>
+<body>
+    <div id="app">
+        <div class="product">
+            <ul>
+                <li v-for="(item,index) in List" :key="item.key">
+                    <table>
+                        <tr>
+                            <th>品項:</th>
+                            <th>價格:</th>
+                            <th>數量:</th>
+                            <th>金額</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>
+                               <img class="pic" :src="item.imgUrl" alt="">
+                                {{item.name}}
+                            </td>
+                            <td>{{item.price}}</td>
+                            <td>
+                                <button @click="handleSub(item)">-</button>
+                                {{item.number}}
+                                <button @click="handlePlus(item)">+</button>
+                            </td>
+                            <td>{{item.number* item.price}}</td>
+                            <td>
+                                <button @click="deleteItem(item)">刪除</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="payment">
+          
+        </div>
+    </div>
+   
+    <script>/*vue.js的內容,嵌入的話要放在body結尾之前*/
+        var app = new Vue({
+            el:"#app",
+            data:{
+                 List:[
+                     {
+                         name:'banana',
+                         key:'1',
+                         price:'230',
+                         number:'0',
+                         imgUrl:'https://images.unsplash.com/photo-1526364163643-89e30b8fcb70?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+                     },
+                     {
+                         name:'apple',
+                         key:'2',
+                         price:'190',
+                         number:'0',
+                         imgUrl:'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+                     },
+                     {
+                         name:'pears',
+                         key:'3',
+                         price:'100',
+                         number:'0',
+                         imgUrl:'https://images.unsplash.com/photo-1594523024633-9cce0195ac35?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fHBlYXJzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+                     },
+                     {   
+                         name:'avocado',
+                         key:'4',
+                         price:'200',
+                         number:'0',
+                         imgUrl:'https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YXZvY2Fkb3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+                     },
+                 ],
+            },
+            methods:{
+                handleSub(item){
+                    console.log(item)
+                    if(item.number>1){
+                        item.number--;
+                    }
+                },
+                handlePlus(item){
+                    console.log(item);
+                    item.number++;
+                },
+                deleteItem(item){
+                    console.log(item);
+                    var Index = this.List.indexOf(item);
+                    console.log(Index);
+                    this.List.splice(Index,1);
+                    console.log(this.List) 
+                }
+            },
+            computed:{
+               
+              
+            },
+         })
+     </script>
+
+</body>
+
+</html>
